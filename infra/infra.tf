@@ -10,6 +10,10 @@ resource "aws_instance" "covidInfraEC2" {
     tags = {
         "Name" = "infraCovidProjet" 
     }
+    
+    root_block_device {
+      volume_size = 20
+    }
 
     user_data = <<-EOF
         #!/bin/bash
