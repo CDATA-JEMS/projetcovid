@@ -8,7 +8,7 @@ variable "ami_id" {
   default     = "ami-022e8cc8f0d3c52fd"
 }
 variable "type_EC2" {
-  default     = "t2.micro" 
+  default     = "t3.medium" 
 }
 
 data "aws_vpc" "vpc_id" {
