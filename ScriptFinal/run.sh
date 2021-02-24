@@ -66,6 +66,10 @@ pig chomage.pig
 sleep 3m
 
 #######################################
+# lancement des requêtes dans hive pour création dataMarts 
+hive scriptHive.hive
+
+#######################################
 # suppression des données
 rm -rf format1
 rm -rf format2
