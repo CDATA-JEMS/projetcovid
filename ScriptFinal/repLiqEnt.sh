@@ -1,11 +1,11 @@
-#Preparer par équipe : NIKNAM Pedram,BEN AMMAR Amira, CHICOUARD Olivier, SUN Andelai. 
-#Dans le cadre de projet:Impact de la Covid sur les entreprises en Europe
-#Script est lancé autmatiquement par run.sh
-#Scripte doit être lance après le script chargmtLiqEnt.sh
-#Script pour preparation de repertoire de Pig pour les données sur liquidation des entreprise en france
-#Envoie des données au HDFS, 
-#suppression des anciens données s'il existe
-#Cloudera doit être lancer avant d'execution de cette script
+#Par l'equipe : NIKNAM Pedram,BEN AMMAR Amira, CHICOUARD Olivier, SUN Andelai. 
+#Dans le cadre de projet : Impact de la Covid19 sur les entreprises en Europe
+#Script lancé automatiquement par run.sh
+#Script à lancer après le script chargmtLiqEnt.sh
+#Script de preparation de repertoire de Pig pour les données sur liquidation des entreprise en france
+#Envoi des données sur HDFS, 
+#suppression des anciennes données si elles existent
+#Cloudera doit être lance avant d'execution de ce script
 
 hadoop fs -mkdir -p /user/cloudera/datalake/prepared_data/LiqEnt
 
