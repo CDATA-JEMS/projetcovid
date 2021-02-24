@@ -13,7 +13,7 @@ csv_lines_Chomage_format = LOAD '/user/cloudera/datalake/prepared_data/chomage/c
 ---Eliminer les entetes
 NoHeader_Chomage = FILTER csv_lines_Chomage_format BY freq != 'freq';
 
----ajoute clonne  de Pays
+---ajoute clone  de Pays
 
 output_etl_complete_ChomageFinal = foreach NoHeader_Chomage generate
             id,            
