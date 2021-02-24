@@ -4,13 +4,13 @@ from datetime import datetime
 import requests
 import json
 
-#télécharge des données de la part de eurostat
+#télécharge des données depuis eurostat
 url="https://ec.europa.eu/eurostat/api/dissemination/sdmx/2.1/data/UNE_RT_M/M.SA.TOTAL.PC_ACT.T.EU27_2020+EU28+EU27_2007+EU25+EA+EA19+EA18+BE+BG+CZ+DK+DE+EE+IE+EL+ES+FR+HR+IT+CY+LV+LT+LU+HU+MT+NL+AT+PL+PT+RO+SI+SK+FI+SE+IS+NO+CH+UK+TR+US+JP/?format=TSV&compressed=false&startPeriod=2020-04&endPeriod=2021-01"
 r = requests.get(url)
 data=r.content.decode("utf-8")
 data=r.content
 
-#mis à jour dés 
+#mise à jour des périodes de dates
 startPeriod="2020-04"
 endPeriod="2021-01"
 data=pd.read_csv(url, sep='\t')
