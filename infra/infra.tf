@@ -30,6 +30,7 @@ resource "aws_instance" "covidInfraEC2" {
         #copier projet git hadoop et lancer docker-compose
         cd /home/ubuntu
         git clone https://github.com/big-data-europe/docker-hadoop-spark-workbench
+        
         cd docker-hadoop-spark-workbench/
         docker-compose -f docker-compose-hive.yml up -d
 
