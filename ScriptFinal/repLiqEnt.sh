@@ -11,4 +11,4 @@ hadoop fs -mkdir -p /user/cloudera/datalake/prepared_data/LiqEnt
 
 hadoop fs -rm /user/cloudera/datalake/prepared_data/LiqEnt/*
 
-hadoop fs -put valeurs_mensuelles.csv /user/cloudera/datalake/prepared_data/LiqEntRéunion
+hadoop fs -put valeurs_mensuelles.csv /user/cloudera/datalake/prepared_data/LiqEnt
