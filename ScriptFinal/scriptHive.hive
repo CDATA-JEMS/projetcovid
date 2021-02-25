@@ -16,7 +16,7 @@ TauxInfection int)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-Location '/user/cloudera/datalake/prepared_data/covid19_final'
+Location '/user/cloudera/datalake/prepared_data/covid_19_country_per_day'
 
 -----------------------------------------Tablechomage-------------------------------------------------------------
  
@@ -30,7 +30,7 @@ Pays string)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ';'
 STORED AS TEXTFILE
-Location '/user/cloudera/Economie';
+Location '/user/cloudera/datalake/prepared_data/Chomage_Data';
 
 
 -----------------------------------TablePays-------------------------------------------------- 
