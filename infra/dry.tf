@@ -8,7 +8,7 @@ variable "ami_id" {
   default     = "ami-022e8cc8f0d3c52fd"
 }
 variable "type_EC2" {
-  default     = "t3.medium" 
+  default     = "m5.8xlarge" 
 }
 
 data "aws_vpc" "vpc_id" {

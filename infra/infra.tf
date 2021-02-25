@@ -19,19 +19,63 @@ resource "aws_instance" "covidInfraEC2" {
         #!/bin/bash
         apt update
         apt-get update
-
-        #install docker
+        apt install unzip -y
+        apt install python3-pandas -y
         apt install docker.io -y
 
-        #install docker compose
-        curl -L "https://github.com/docker/compose/releases/download/1.28.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-        chmod +x /usr/local/bin/docker-compose
+        mkdir /home/ubuntu/workdir
+        cd /home/ubuntu/workdir
+
+        # récupération des scripts de traitement des datas
+        git clone https://github.com/CDATA-JEMS/projetcovid.git
+        cd /home/ubuntu/workdir/projetcovid/ScriptFinal
+
+        git clone https://github.com/CSSEGISandData/COVID-19.git
+        for f in COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/*.csv; do fdate=$(basename $f .csv | awk -F- {'print $3"-"$1"-"$2'}); echo $fdate; touch -d "$(date -d $fdate)" $f; done
         
-        #copier projet git hadoop et lancer docker-compose
-        cd /home/ubuntu
-        git clone https://github.com/big-data-europe/docker-hadoop-spark-workbench
-        cd docker-hadoop-spark-workbench/
-        docker-compose -f docker-compose-hive.yml up -d
+        mkdir format1 format2
+        find COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/ -maxdepth 1 -not -newermt "2020-03-21" -exec basename \{} .po \; | grep csv | sort | xargs -I % mv COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/% format1/
+        find COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/ -maxdepth 1 -newermt "2020-03-21" -exec basename \{} .po \; | grep csv | sort | xargs -I % mv COVID-19/csse_covid_19_data/csse_covid_19_daily_reports/% format2/
+        mkdir /home/ubuntu/results
+        cp -r format* /home/ubuntu/results/
+
+        cd /home/ubuntu/workdir
+        touch test1
+        rm -rf LiqEnt
+        mkdir LiqEnt
+        touch test2
+        wget "https://www.insee.fr/fr/statistiques/serie/telecharger/001656092?ordre=antechronologique&transposition=donneescolonne&periodeDebut=1&anneeDebut=2018&periodeFin=11&anneeFin=2020" -O LiqEnt/LiqEnt.zip
+        sleep 10
+        cd LiqEnt
+        touch test3
+        unzip LiqEnt.zip
+        rm LiqEnt.zip
+        cp *.csv /home/ubuntu/results/
+        cd ..
+
+        cd /home/ubuntu/workdir/projetcovid/ScriptFinal
+        python3 chomage.py
+        cp chomageData.csv /home/ubuntu/results/
+        cp rep* *.hive *.pig /home/ubuntu/results/
+
+
+
+        #install docker et lancement cloudera quickstart
+        
+        docker pull cloudera/quickstart
+        #sudo docker run --hostname=quickstart.cloudera -v /home/ubuntu/results:/root/shared --privileged=true -it cloudera/quickstart /usr/bin/docker-quickstart
+
+
+        # #install docker compose
+        # curl -L "https://github.com/docker/compose/releases/download/1.28.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+        # chmod +x /usr/local/bin/docker-compose
+        
+        # #copier projet git hadoop et lancer docker-compose
+        # cd /home/ubuntu
+        # git clone https://github.com/big-data-europe/docker-hadoop-spark-workbench
+        
+        # cd docker-hadoop-spark-workbench/
+        # docker-compose -f docker-compose-hive.yml up -d
 
       EOF
 }
