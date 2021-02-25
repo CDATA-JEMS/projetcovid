@@ -4,5 +4,7 @@ Mise en place d’une architecture Big Data pour évaluer les impacts de la Covi
 
 load and execute run.sh
 
+Attention, do not play too much with the m5.8xlarge  ;-)
+
 have fun
 The CBDATA Team 2 ^^
